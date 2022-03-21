@@ -43,9 +43,11 @@ class Labyrinthe{
         }else if(action==GAUCHE){
             coordonnees[0] = x;
             coordonnees[1] = y-1;
-        }else{
+        }else if(action==DROITE){
             coordonnees[0] = x;
             coordonnees[1] = y+1;
+        }else{
+            throw new ActionInconnueException(action);
         }
         return coordonnees;
     }
