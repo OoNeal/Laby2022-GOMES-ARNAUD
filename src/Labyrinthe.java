@@ -1,4 +1,6 @@
-/** 
+class ActionInconnueException extends Exception{ }
+
+/**
  * Squelette de classe labyrinthe
  */
 class Labyrinthe{
@@ -19,11 +21,11 @@ class Labyrinthe{
 
     char getChar(int x, int y) {
         char case;
-        if(murs[x][y]){
+        if(this.murs[x][y]){
             case = MUR;
-        }else if((x==personnage.getX()) && (y==personnage.getY())){
+        }else if((x==this.personnage.getX()) && (y==this.personnage.getY())){
             case = PJ;
-        }else if((x==sortie.getX()) && (y==sortie.getY())){
+        }else if((x==this.sortie.getX()) && (y==this.sortie.getY())){
             case = SORTIE;
         }else{
             case = VIDE;
@@ -64,7 +66,13 @@ class Labyrinthe{
 
 
     public boolean etreFini() {
-        throw new Error("TODO");
+        boolean fini;
+        if((this.personnage.getX()==this.sortie.getX()) && (this.personnage.getY()==this.sortie.getY())){
+            fini = true;
+        }else{
+            fini = false;
+        }
+        return fini;
     }
 
     public static Labyrinthe chargerLabyrinthe(String nom) {
