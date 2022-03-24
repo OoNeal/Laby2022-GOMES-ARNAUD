@@ -1,4 +1,8 @@
-class ActionInconnueException extends Exception{ }
+class ActionInconnueException extends Exception{
+    public ActionInconnueException(String s){
+        super(s);
+    }
+}
 
 /**
  * Squelette de classe labyrinthe
@@ -10,31 +14,31 @@ class Labyrinthe{
     public static final char SORTIE = 'S';
     public static final char VIDE = '.';
 
-    public static final String HAUT = 'haut';
-    public static final String BAS = 'bas';
-    public static final String GAUCHE = 'gauche';
-    public static final String DROITE = 'droite';
+    public static final String HAUT = "haut";
+    public static final String BAS = "bas";
+    public static final String GAUCHE = "gauche";
+    public static final String DROITE = "droite";
 
     private boolean[][] murs;
     private Personnage personnage;
     private Sortie sortie;
 
     char getChar(int x, int y) {
-        char case;
+        char cases;
         if(this.murs[x][y]){
-            case = MUR;
+            cases = MUR;
         }else if((x==this.personnage.getX()) && (y==this.personnage.getY())){
-            case = PJ;
+            cases = PJ;
         }else if((x==this.sortie.getX()) && (y==this.sortie.getY())){
-            case = SORTIE;
+            cases = SORTIE;
         }else{
-            case = VIDE;
+            cases = VIDE;
         }
-        return case;
+        return cases;
     }
 
 
-    static int[] getSuivant(int x, int y, String action) {
+    static int[] getSuivant(int x, int y, String action) throws ActionInconnueException{
         int[] coordonnees = new int[2];
         if(action==HAUT){
             coordonnees[0] = x-1;
@@ -61,7 +65,13 @@ class Labyrinthe{
 
 
     public String toString() {
-        throw new Error("TODO");
+        String laby = "";
+        for(int i=0;i<this.murs.length;i++){
+            for(int j=0;j<this.murs.length;j++){
+                laby += getChar(i,j);
+            }
+        }
+        return laby;
     }
 
 
