@@ -9,7 +9,7 @@ class ActionInconnueException extends Exception{
  */
 class Labyrinthe{
 
-    public static final char MUR = 'X';
+    public static final char MUR = 'X'; 
     public static final char PJ = 'P';
     public static final char SORTIE = 'S';
     public static final char VIDE = '.';
@@ -59,15 +59,13 @@ class Labyrinthe{
     }
 
 
-    void deplacerPerso(String action) throws ActionInconnueException {
-        if (action != HAUT && action != BAS && action != GAUCHE && action != DROITE)
-            throw new ActionInconnueException(action);
-        int pos[] = new int[]
-        while(getChar(getSuivant(this.personnage.getX(),this.personnage.getY(),action)) != MUR){
-            pos = getSuivant(this.personnage.getX(),this.personnage.getY(),action);
+    void deplacerPerso(String action) throws ActionInconnueException{
+        int pos[] = new int[];
+        pos = getSuivant(this.personnage.getX(),this.personnage.getY(),action);
+        while(!this.murs[pos[0]][pos[1]]){
             this.personnage.setX(pos[0]);
             this.personnage.setY(pos[1]);
-            int[][] p = new int[10][10];
+            pos = getSuivant(this.personnage.getX(), this.personnage.getY(), action);
         }
     }
 
