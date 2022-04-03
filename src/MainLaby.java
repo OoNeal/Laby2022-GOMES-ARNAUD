@@ -11,7 +11,7 @@ public class MainLaby {
                 laby.chargerLabyrinthe(args[0]);
             }
             catch (FichierIncorrectException e2) {
-                System.out.println(e2.message());
+                System.out.println("Le fichier n'existe pas ");
                 System.exit(0);
             }
             catch (IOException e) {
