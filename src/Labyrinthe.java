@@ -1,4 +1,4 @@
-class ActionInconnueException extends Exception{
+public class ActionInconnueException extends Exception{
     public ActionInconnueException(String s){
         super(s);
     }
@@ -60,7 +60,7 @@ class Labyrinthe{
 
 
     void deplacerPerso(String action) throws ActionInconnueException{
-        int pos[] = new int[];
+        int pos[] = new int[2];
         pos = getSuivant(this.personnage.getX(),this.personnage.getY(),action);
         while(!this.murs[pos[0]][pos[1]]){
             this.personnage.setX(pos[0]);
