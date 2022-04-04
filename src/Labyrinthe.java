@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Squelette de classe labyrinthe
  */
@@ -34,16 +36,16 @@ class Labyrinthe{
 
     static int[] getSuivant(int x, int y, String action) throws ActionInconnueException{
         int[] coordonnees = new int[2];
-        if(action==HAUT){
+        if(action.equals(HAUT)){
             coordonnees[0] = x-1;
             coordonnees[1] = y;
-        }else if(action==BAS){
+        }else if(action.equals(BAS)){
             coordonnees[0] = x+1;
             coordonnees[1] = y;
-        }else if(action==GAUCHE){
+        }else if(action.equals(GAUCHE)){
             coordonnees[0] = x;
             coordonnees[1] = y-1;
-        }else if(action==DROITE){
+        }else if(action.equals(DROITE)){
             coordonnees[0] = x;
             coordonnees[1] = y+1;
         }else{
@@ -84,8 +86,8 @@ class Labyrinthe{
         return fini;
     }
 
-    public static Labyrinthe chargerLabyrinthe(String nom) {
-        throw new Error("TODO");
+    public static Labyrinthe chargerLabyrinthe(String nom) throws IOException,FichierIncorrectException {
+
     }
 
 }
