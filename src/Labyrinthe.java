@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -19,6 +21,12 @@ class Labyrinthe{
     private Personnage personnage;
     private Sortie sortie;
 
+    public Labyrinthe(boolean[][] m,Personnage p, Sortie s){
+        this.murs = m;
+        this.personnage = p;
+        this.sortie = s;
+    }
+
     char getChar(int x, int y) {
         char cases;
         if(this.murs[x][y]){
@@ -36,27 +44,31 @@ class Labyrinthe{
 
     static int[] getSuivant(int x, int y, String action) throws ActionInconnueException{
         int[] coordonnees = new int[2];
-        if(action.equals(HAUT)){
-            coordonnees[0] = x-1;
-            coordonnees[1] = y;
-        }else if(action.equals(BAS)){
-            coordonnees[0] = x+1;
-            coordonnees[1] = y;
-        }else if(action.equals(GAUCHE)){
-            coordonnees[0] = x;
-            coordonnees[1] = y-1;
-        }else if(action.equals(DROITE)){
-            coordonnees[0] = x;
-            coordonnees[1] = y+1;
-        }else{
-            throw new ActionInconnueException(action);
+        switch (action) {
+            case HAUT -> {
+                coordonnees[0] = x - 1;
+                coordonnees[1] = y;
+            }
+            case BAS -> {
+                coordonnees[0] = x + 1;
+                coordonnees[1] = y;
+            }
+            case GAUCHE -> {
+                coordonnees[0] = x;
+                coordonnees[1] = y - 1;
+            }
+            case DROITE -> {
+                coordonnees[0] = x;
+                coordonnees[1] = y + 1;
+            }
+            default -> throw new ActionInconnueException(action);
         }
         return coordonnees;
     }
 
 
     void deplacerPerso(String action) throws ActionInconnueException{
-        int pos[] = new int[2];
+        int[] pos = new int[2];
         pos = getSuivant(this.personnage.getX(),this.personnage.getY(),action);
         while(!this.murs[pos[0]][pos[1]]){
             this.personnage.setX(pos[0]);
@@ -77,17 +89,35 @@ class Labyrinthe{
     }
 
     public boolean etreFini() {
-        boolean fini;
-        if((this.personnage.getX()==this.sortie.getX()) && (this.personnage.getY()==this.sortie.getY())){
-            fini = true;
-        }else{
-            fini = false;
-        }
-        return fini;
+        return ((this.personnage.getX()==this.sortie.getX()) && (this.personnage.getY()==this.sortie.getY()));
     }
 
     public static Labyrinthe chargerLabyrinthe(String nom) throws IOException,FichierIncorrectException {
-
+        BufferedReader br = new BufferedReader(new FileReader(nom));
+        int nbLigne = Integer.parseInt(br.readLine());
+        int nbColonne = Integer.parseInt(br.readLine());
+        boolean[][] m = new boolean[nbLigne][nbColonne];
+        String ligne = "";
+        Sortie s = new Sortie(-1,-1);
+        Personnage p = new Personnage(-1,-1);
+        for(int i=0;i<=nbLigne;i++){
+            for(int j=0;j<=nbColonne;j++){
+                ligne = br.readLine();
+                char element = ligne.charAt(j);
+                if(element=='X'){
+                    m[i][j] = true;
+                }else if(element=='.'){
+                    m[i][j] = false;
+                }else if(element=='S'){
+                    s = new Sortie(i,j);
+                }else if(element=='P'){
+                    p = new Personnage(i,j);
+                }
+            }
+        }
+        Labyrinthe laby = new Labyrinthe(m,p,s);
+        br.close();
+        return laby;
     }
 
 }
