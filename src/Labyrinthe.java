@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Squelette de classe labyrinthe
  */
-class Labyrinthe{
+public class Labyrinthe{
 
     public static final char MUR = 'X'; 
     public static final char PJ = 'P';
@@ -27,7 +27,7 @@ class Labyrinthe{
         this.sortie = s;
     }
 
-    char getChar(int x, int y) {
+    public char getChar(int x, int y) {
         char cases;
         if(this.murs[x][y]){
             cases = MUR;
@@ -42,7 +42,7 @@ class Labyrinthe{
     }
 
 
-    static int[] getSuivant(int x, int y, String action) throws ActionInconnueException{
+    public static int[] getSuivant(int x, int y, String action) throws ActionInconnueException{
         int[] coordonnees = new int[2];
         switch (action) {
             case HAUT -> {
@@ -67,8 +67,8 @@ class Labyrinthe{
     }
 
 
-    void deplacerPerso(String action) throws ActionInconnueException{
-        int[] pos = new int[2];
+    public void deplacerPerso(String action) throws ActionInconnueException{
+        int[] pos;
         pos = getSuivant(this.personnage.getX(),this.personnage.getY(),action);
         while(!this.murs[pos[0]][pos[1]]){
             this.personnage.setX(pos[0]);
@@ -100,9 +100,9 @@ class Labyrinthe{
         String ligne = "";
         Sortie s = new Sortie(-1,-1);
         Personnage p = new Personnage(-1,-1);
-        for(int i=0;i<=nbLigne;i++){
-            for(int j=0;j<=nbColonne;j++){
-                ligne = br.readLine();
+        for(int i=0;i<nbLigne;i++){
+            ligne = br.readLine();
+            for(int j=0;j<nbColonne;j++){
                 char element = ligne.charAt(j);
                 if(element=='X'){
                     m[i][j] = true;
@@ -113,6 +113,7 @@ class Labyrinthe{
                 }else if(element=='P'){
                     p = new Personnage(i,j);
                 }
+
             }
         }
         Labyrinthe laby = new Labyrinthe(m,p,s);
