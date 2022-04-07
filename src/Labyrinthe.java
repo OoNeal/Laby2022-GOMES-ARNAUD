@@ -81,9 +81,10 @@ public class Labyrinthe{
     public String toString() {
         String laby = "";
         for(int i=0;i<this.murs.length;i++){
-            for(int j=0;j<this.murs.length;j++){
+            for(int j=0;j<this.murs[i].length;j++){
                 laby += getChar(i,j);
             }
+            laby += "\n";
         }
         return laby;
     }
