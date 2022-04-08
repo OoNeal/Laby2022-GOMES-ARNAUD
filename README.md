@@ -43,16 +43,16 @@ le test pour la méthode `chargerLaby()`
 2. Nous ajoutons un test pour `chargerLaby()` pour voir si 
 des exceptions sont levées.
 
-####__getChar()__
+#### __getChar()__
 Etant utiliser dans les tests de `chargerLaby(`, il ne 
 nous a pas semblé nécessaire de faire de test sur cette 
 classe.
 
-####__getSuivant()__
+#### __getSuivant()__
 1. Nous testons une seule fois cette méthode, dans toutes les 
 directions possibles.
 
-####__deplacerPerso()__
+#### __deplacerPerso()__
 1. Le premier test ne fait que déplacer le personnage vers 
 le haut. Simplement pour savoir s'il va jusqu'au mur ou non.
 2. Le second test aurait pu être fait dans getSuivant() et
@@ -61,7 +61,7 @@ lorsque l'utilisateur rentre une action incorrecte.
 3. Le troisième test vérifie que le personnage ne peut pas
 prendre la sortie alors qu'il n'est pas contre un mur.
 
-####__etreFini()__
+#### __etreFini()__
 Ce test vérifie que le labyrinthe est fini 
 quand le personnage atteint la sortie en étant contre un mur.
 
